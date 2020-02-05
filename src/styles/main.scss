@@ -1,0 +1,32 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.chats {
+  flex: 1;
+  background: purple;
+  z-index: 1;
+}
+
+.board {
+  flex: 4;
+  background: url('https://st4.depositphotos.com/2430771/20565/v/450/depositphotos_205657476-stock-illustration-gray-concrete-tiles-seamless-texture.jpg');
+}
+
+.board_panel {
+  cursor: grab;
+  height: 200%;
+  width: 200%;
+  -webkit-box-shadow: 0px 0px 129px -37px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 129px -37px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 129px -37px rgba(0,0,0,0.75);
+  background: url('https://cdn.dribbble.com/users/69156/screenshots/2398680/icq_pttrn3.png');
+}

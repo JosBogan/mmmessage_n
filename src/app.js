@@ -2,10 +2,12 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './styles/main.scss'
 
+import Home from './components/Home'
+
 class App extends React.Component {
   render() {
     return (
-      <h1>React Starter Pack</h1>
+      <Home />
     )
   }
 }
