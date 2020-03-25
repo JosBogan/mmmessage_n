@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './styles/main.scss'
+import './styles/messages.scss'
 
 import Home from './components/Home'
 
