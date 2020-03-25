@@ -55,6 +55,10 @@ class Home extends React.Component{
     this.setState({ canvasPosition, mouseStartPosition, newComment: this.newCommentDefault })
   }
 
+  closeNewComment = () => {
+    this.setState({ newComment: this.newCommentDefault })
+  }
+
   handleClick = (event) => {
     const mouseStartPosition = { x: event.clientX, y: event.clientY }
     this.setState({ clicked: true, mouseStartPosition, newComment: this.newCommentDefault })
@@ -112,7 +116,12 @@ class Home extends React.Component{
             onDoubleClick={this.createComment}
           >
           </div>
-          {this.state.newComment.toggle && <NewComment coords={this.state.newComment.coords}/>}
+          {this.state.newComment.toggle && 
+          <NewComment 
+            coords={this.state.newComment.coords}
+            closeNewComment={this.closeNewComment}
+          />
+          }
         </section>
       </div>
     )
