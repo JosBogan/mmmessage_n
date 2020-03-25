@@ -13,7 +13,7 @@ class NewComment extends React.Component {
         top={this.props.coords.y}
         left={this.props.coords.x}
       >
-
+        <textarea className="new_message_text_area" autoFocus/>
       </div>
     )
   }
