@@ -82,7 +82,7 @@ class Home extends React.Component{
       y: event.clientY - cds.y * scale
     }
 
-    this.setState({ scale, canvasPosition })
+    this.setState({ scale, canvasPosition , newComment: this.newCommentDefault })
   }
 
   createComment = (event) => {
