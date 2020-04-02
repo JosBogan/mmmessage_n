@@ -1,10 +1,16 @@
 import React from 'react'
+import io from 'socket.io-client'
+
 import NewComment from './messages/NewMessage'
 import Message from './messages/Message'
+import ModalBackDrop from './modals/ModalBackDrop'
+import NewMessageBoard from './modals/NewMessageBoard'
 
 class Home extends React.Component{
 
   state = {
+    socket: null,
+    messages: [],
     clicked: false,
     mouseStartPosition: null,
     canvasPosition: {
@@ -18,7 +24,8 @@ class Home extends React.Component{
         x: null,
         y: null
       }
-    }
+    },
+    modal: false
   }
 
   newCommentDefault = {
@@ -29,9 +36,18 @@ class Home extends React.Component{
     }
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     window.addEventListener('mousemove', this.handleDrag)
     window.addEventListener('mouseup', this.handleMouseUp)
+
+    const socket = io('localhost:4000')
+  
+    socket.on('chat message', (message) => {
+      console.log(message)
+      const messages = [...this.state.messages, message]
+      this.setState({ messages })
+    })
+    this.setState({ socket })
   }
 
 
@@ -101,10 +117,18 @@ class Home extends React.Component{
     this.setState({ newComment })
   }
 
+  modalToggle = () => {
+    console.log(this.state.modal)
+    this.setState({ modal: !this.state.modal })
+  }
+ 
   render() {
     return (
       <div className="container">
-        <section className="chats"></section>
+        {this.state.modal && <ModalBackDrop modalToggle={this.modalToggle} component={<NewMessageBoard />}/>}
+        <section className="chats">
+          <button onClick={this.modalToggle}>New</button>
+        </section>
         <section className="board">
           <div 
             className="board_panel"
@@ -124,7 +148,7 @@ class Home extends React.Component{
               }}
               messageText={'This is the Root message'}
             />
-            {this.props.messages.map(message => (
+            {this.state.messages.map(message => (
               <Message 
                 key={message.coords.y}
                 createComment={this.createComment}
@@ -137,7 +161,7 @@ class Home extends React.Component{
           <NewComment 
             coords={this.state.newComment.coords}
             closeNewMessage={this.closeNewMessage}
-            socket={this.props.socket}
+            socket={this.state.socket}
             canvasPosition={this.state.canvasPosition}
             scale={this.state.scale}
           />

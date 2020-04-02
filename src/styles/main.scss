@@ -10,7 +10,12 @@
   font-weight: 300;
 }
 
+h1, h2, h3, h4 {
+  font-family: 'Nanum Gothic', sans-serif;
+}
+
 .container {
+  position: relative;
   display: flex;
   height: 100vh;
   width: 100vw;
@@ -19,7 +24,8 @@
 
 .chats {
   flex: 1;
-  background: purple;
+  // background: purple;
+  background: white;
   z-index: 1;
   // display: absolute;
 }
@@ -50,3 +56,30 @@
       /* background by SVGBackgrounds.com */
 }
 
+.modal_back_drop {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background: rgba(0,0,0,0.50);
+  z-index: 10;
+}
+
+.new_message_board {
+  padding: 30px 40px;
+  height: 90%;
+  width: 50%;
+  background: whitesmoke;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 129px -37px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 129px -37px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 129px -37px rgba(0,0,0,0.75);
+}
+
+.new_message_board_header {
+  font-weight: 700;
+}
