@@ -1,4 +1,6 @@
-.message_wrapper {
+//  New Message
+
+.new_message_wrapper {
   width: 300px;
   min-height: 150px;
   height: 150px;
@@ -53,8 +55,34 @@
   background: rgb(185, 35, 185);
 }
 
-
-
 .new_message_submit_button:active {
   transform: translateY(0px);
+}
+
+.new_message_spline {
+  position: absolute;
+}
+
+// Message
+
+.message_wrapper {
+  position: absolute;
+  // width: 20em;
+  background: rgb(243, 233, 243);
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 0px 54px -9px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 54px -9px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 54px -9px rgba(0,0,0,0.75);
+  padding: 5px 10px;
+  cursor: pointer;
+  transform: translate(-50%, -50%)
+}
+
+.message_text {
+  pointer-events: none;
+  user-select: none; /* supported by Chrome and Opera */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
 }

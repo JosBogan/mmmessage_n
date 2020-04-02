@@ -1,5 +1,6 @@
 import React from 'react'
-import NewComment from './messages/NewComment'
+import NewComment from './messages/NewMessage'
+import Message from './messages/Message'
 
 class Home extends React.Component{
 
@@ -55,7 +56,7 @@ class Home extends React.Component{
     this.setState({ canvasPosition, mouseStartPosition, newComment: this.newCommentDefault })
   }
 
-  closeNewComment = () => {
+  closeNewMessage = () => {
     this.setState({ newComment: this.newCommentDefault })
   }
 
@@ -115,11 +116,30 @@ class Home extends React.Component{
             onWheel={this.handleScroll}
             onDoubleClick={this.createComment}
           >
+            <Message 
+              createComment={this.createComment}
+              coords={{
+                x: 2000,
+                y: 1250
+              }}
+              messageText={'This is the Root message'}
+            />
+            {this.props.messages.map(message => (
+              <Message 
+                key={message.coords.y}
+                createComment={this.createComment}
+                messageText={message.message}
+                coords={message.coords}
+              />
+            ))}
           </div>
           {this.state.newComment.toggle && 
           <NewComment 
             coords={this.state.newComment.coords}
-            closeNewComment={this.closeNewComment}
+            closeNewMessage={this.closeNewMessage}
+            socket={this.props.socket}
+            canvasPosition={this.state.canvasPosition}
+            scale={this.state.scale}
           />
           }
         </section>

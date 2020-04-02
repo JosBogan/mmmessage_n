@@ -8,8 +8,16 @@ class NewComment extends React.Component {
 
   handlesubmit = (event) => {
     event.preventDefault()
-    console.log(this.state.message)
-    this.props.closeNewComment()
+    const chatOffset = document.querySelector('.chats').getBoundingClientRect().width
+    this.props.socket.emit('chat message', {
+      message: this.state.message,
+      coords: {
+        x: ((this.props.coords.x - chatOffset) - this.props.canvasPosition.x) / this.props.scale,
+        y: ((this.props.coords.y) - this.props.canvasPosition.y) / this.props.scale
+      }
+    })
+    
+    this.props.closeNewMessage()
   }
 
   handleChange = () => {
@@ -19,7 +27,7 @@ class NewComment extends React.Component {
   render() {
     return (
       <div 
-        className="message_wrapper"
+        className="new_message_wrapper"
         style={{
           top: this.props.coords.y,
           left: this.props.coords.x
