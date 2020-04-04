@@ -5,6 +5,7 @@ import NewComment from './messages/NewMessage'
 import Message from './messages/Message'
 import ModalBackDrop from './modals/ModalBackDrop'
 import NewMessageBoard from './modals/NewMessageBoard'
+import Auth from '../lib/auth'
 
 class Home extends React.Component{
 
@@ -40,7 +41,15 @@ class Home extends React.Component{
     window.addEventListener('mousemove', this.handleDrag)
     window.addEventListener('mouseup', this.handleMouseUp)
 
-    const socket = io('localhost:4000')
+    const socket = io('localhost:4000', {
+      transportOptions: {
+        polling: {
+          extraHeaders: {
+            'Authorization': `Bearer ${Auth.getToken}`
+          }
+        }
+      }
+    })
   
     socket.on('chat message', (message) => {
       console.log(message)

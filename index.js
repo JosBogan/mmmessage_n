@@ -8,6 +8,8 @@ const io = require('socket.io')(http)
 const logger = require('./lib/logger')
 const router = require('./config/router')
 
+const socketSecureRoute = require('./lib/secureRoute')
+
 const dbURI = process.env.MONGODB_URI || 'mongodb://localhost/mmmessage'
 
 const port = process.env.PORT || 4000
@@ -25,9 +27,17 @@ app.use('/api', router)
 
 io.on('connection', (socket) => {
   console.log('made socket connection')
+  console.log(socket.handshake.headers)
+  // io.use((socket, next) => {
+  //   console.log(socket.handshake.headers)
+  //   next()
+  // })
 
   socket.on('chat message', (message) => {
+    console.log(socket.handshake.headers['Authorization'])
     console.log(message)
+
+
     io.emit('chat message', message)
   })
 

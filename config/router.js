@@ -11,7 +11,8 @@ router.route('/login')
   .post(auth.login)
 
 router.route('/users')
-  .get(secureRoute, users.index)
+  // .get(secureRoute, users.index)
+  .get(users.index)
 
 
 module.exports = router
